@@ -1,0 +1,50 @@
+[gd_scene load_steps=7 format=3 uid="uid://bvpir2jnee1fm"]
+
+[ext_resource type="Texture2D" uid="uid://btmyvqxtxd0wl" path="res://assets/crosswalk_man.png" id="1_3vyb7"]
+[ext_resource type="Script" uid="uid://bdl6ndxp6ubb3" path="res://scenes/Player.cs" id="1_g2els"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g2els"]
+atlas = ExtResource("1_3vyb7")
+region = Rect2(0, 0, 200, 223)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qhqgy"]
+atlas = ExtResource("1_3vyb7")
+region = Rect2(0, 0, 200, 223)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dqkch"]
+atlas = ExtResource("1_3vyb7")
+region = Rect2(200, 0, 200, 223)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qlg0r"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g2els")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qhqgy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dqkch")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_g2els")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -66)
+sprite_frames = SubResource("SpriteFrames_qlg0r")
+animation = &"walk"
+autoplay = "idle"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-14, -1, -44, -1, -58, -18, -28, -41, -18, -68, -38, -71, -30, -107, -3, -120, 1, -154, 25, -149, 32, -134, 22, -116, 19, -105, 23, -94, 47, -80, 50, -68, 43, -61, 23, -71, 16, -70, 27, -50, 35, -26, 40, -13, 22, 0)

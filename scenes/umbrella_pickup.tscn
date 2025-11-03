@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dsbfkb7ppoq35"]
+
+[ext_resource type="Texture2D" uid="uid://dsmjtbx61c08p" path="res://assets/umbrella.png" id="1_lmgak"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ucaao"]
+size = Vector2(128, 110)
+
+[node name="Area2D" type="Area2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-4, -4)
+shape = SubResource("RectangleShape2D_ucaao")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_lmgak")
