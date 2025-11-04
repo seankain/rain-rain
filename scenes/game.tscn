@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://ddf22eosfyf71" path="res://assets/background.png" id="2_yqjtg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uwrxv"]
-size = Vector2(1154, 134)
+size = Vector2(1751, 134)
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_lnu2h")
@@ -21,7 +21,7 @@ z_index = 1
 z_index = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(-2, 257)
+position = Vector2(60.5, 257)
 shape = SubResource("RectangleShape2D_uwrxv")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -29,3 +29,5 @@ visibility_layer = 2
 position = Vector2(63.99994, -319.99997)
 scale = Vector2(1.2636718, 1.2539064)
 texture = ExtResource("2_yqjtg")
+
+[node name="Node2D" type="Node2D" parent="."]

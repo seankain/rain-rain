@@ -25,7 +25,8 @@ private double elapsed = 0;
 	{
 		elapsed+=delta;
 		if(elapsed >= cooldown){
-			SpawnEnemy(new Vector2{X=0,Y=-100});
+			// todo: handle resolution changes
+			SpawnEnemy(new Vector2{X=Random.Shared.Next(-580,650),Y=-200});
 			elapsed = 0;
 		}
 	}
