@@ -14,7 +14,8 @@ public partial class EnemyDrop : RigidBody2D
 	}
 
     private void HandleAnimationFinished()
-    {
+	{
+		GD.Print(this.anim.Animation);
         if(this.anim.Animation == "splash")
         {
 			this.Visible = false;
