@@ -55,6 +55,7 @@ animations = [{
 radius = 55.00909
 
 [node name="EnemyDrop" type="RigidBody2D" node_paths=PackedStringArray("anim")]
+lock_rotation = true
 contact_monitor = true
 max_contacts_reported = 1
 script = ExtResource("1_v1mci")

@@ -6,6 +6,14 @@ public partial class Player : CharacterBody2D
 	public const float Speed = 300.0f;
 	public const float JumpVelocity = -400.0f;
 
+	private AnimatedSprite2D anim;
+
+    public override void _Ready()
+    {
+		anim = GetNode<AnimatedSprite2D>("Player/AnimatedSprite2D");
+    }
+
+
 	public override void _PhysicsProcess(double delta)
 	{
 		Vector2 velocity = Velocity;
