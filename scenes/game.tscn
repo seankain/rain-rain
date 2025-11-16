@@ -1,17 +1,57 @@
-[gd_scene load_steps=6 format=3 uid="uid://bvj5afr401yta"]
+[gd_scene load_steps=7 format=3 uid="uid://bvj5afr401yta"]
 
 [ext_resource type="Script" uid="uid://ctbqitrpka3ju" path="res://scenes/Game.cs" id="1_lnu2h"]
 [ext_resource type="PackedScene" uid="uid://bvpir2jnee1fm" path="res://scenes/player.tscn" id="1_uwrxv"]
 [ext_resource type="PackedScene" uid="uid://dkjtqqc56oema" path="res://scenes/enemy_drop.tscn" id="2_lbhrr"]
 [ext_resource type="Texture2D" uid="uid://ddf22eosfyf71" path="res://assets/background.png" id="2_yqjtg"]
+[ext_resource type="Script" uid="uid://8n6ucf77h1qk" path="res://scenes/Hud.cs" id="3_iywne"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uwrxv"]
 size = Vector2(1751, 134)
 
-[node name="Game" type="Node2D"]
+[node name="Game" type="Node2D" node_paths=PackedStringArray("hud", "player")]
 script = ExtResource("1_lnu2h")
-cooldown = 0.1
+cooldown = 0.5
+hud = NodePath("CanvasLayer")
+player = NodePath("Player")
 EnemyScene = ExtResource("2_lbhrr")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." node_paths=PackedStringArray("scoreLabel", "messageLabel", "messageTimer")]
+offset = Vector2(-593.8, -266.82)
+transform = Transform2D(1, 0, 0, 1, -593.8, -266.82)
+follow_viewport_enabled = true
+script = ExtResource("3_iywne")
+scoreLabel = NodePath("Score")
+messageLabel = NodePath("Message")
+messageTimer = NodePath("MessageTimer")
+
+[node name="Score" type="Label" parent="CanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -280.0
+offset_bottom = 65.0
+grow_horizontal = 0
+size_flags_horizontal = 8
+size_flags_vertical = 0
+text = "0"
+horizontal_alignment = 2
+
+[node name="Message" type="Label" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -0.5
+offset_top = -11.5
+offset_right = 0.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+
+[node name="MessageTimer" type="Timer" parent="CanvasLayer"]
 
 [node name="Player" parent="." instance=ExtResource("1_uwrxv")]
 z_index = 1
@@ -20,15 +60,13 @@ z_index = 1
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 z_index = 1
+position = Vector2(0, 306.775)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(60.5, 257)
 shape = SubResource("RectangleShape2D_uwrxv")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 visibility_layer = 2
-position = Vector2(63.99994, -319.99997)
+position = Vector2(0, -322.18)
 scale = Vector2(1.2636718, 1.2539064)
 texture = ExtResource("2_yqjtg")
-
-[node name="Node2D" type="Node2D" parent="."]

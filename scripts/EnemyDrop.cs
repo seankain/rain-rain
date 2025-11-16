@@ -15,7 +15,6 @@ public partial class EnemyDrop : RigidBody2D
 
     private void HandleAnimationFinished()
 	{
-		GD.Print(this.anim.Animation);
         if(this.anim.Animation == "splash")
         {
 			this.Visible = false;
@@ -29,6 +28,10 @@ public partial class EnemyDrop : RigidBody2D
 	}
 
 	public void HandleCollision(Node body){
+        if (body.IsInGroup("player"))
+        {
+			((Player)body).Hit();
+        }
 		anim.Play("splash");
 	}
 }

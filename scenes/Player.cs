@@ -1,21 +1,38 @@
 using Godot;
 using System;
 
+public delegate void DeathEventHandler();
 public partial class Player : CharacterBody2D
 {
-	public const float Speed = 300.0f;
+	public event DeathEventHandler Died;
+
+	public const float Speed = 600.0f;
 	public const float JumpVelocity = -400.0f;
 
+	private bool Dead = false;
+
+	[Export]
 	private AnimatedSprite2D anim;
 
-    public override void _Ready()
-    {
-		anim = GetNode<AnimatedSprite2D>("Player/AnimatedSprite2D");
+	public override void _Ready()
+	{
+	}
+
+	public void Hit()
+	{
+		if(Dead){ return; }
+		this.Died?.Invoke();
+		Die();
+	}
+
+	public void Die()
+	{
+		Dead = true;
+		anim.Rotate(Mathf.DegToRad(90));
     }
-
-
 	public override void _PhysicsProcess(double delta)
 	{
+		if(Dead){ return; }
 		Vector2 velocity = Velocity;
 
 		// Add the gravity.
@@ -45,4 +62,6 @@ public partial class Player : CharacterBody2D
 		Velocity = velocity;
 		MoveAndSlide();
 	}
+
+
 }

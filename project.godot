@@ -19,6 +19,10 @@ config/icon="res://icon.svg"
 
 project/assembly_name="RainRain"
 
+[global_group]
+
+player=""
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0

@@ -55,6 +55,7 @@ animations = [{
 radius = 55.00909
 
 [node name="EnemyDrop" type="RigidBody2D" node_paths=PackedStringArray("anim")]
+collision_layer = 2
 lock_rotation = true
 contact_monitor = true
 max_contacts_reported = 1
