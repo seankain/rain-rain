@@ -40,7 +40,15 @@ public partial class Player : CharacterBody2D
 		{
 			velocity += GetGravity() * (float)delta;
 		}
-
+		
+		if(velocity.IsZeroApprox())
+		{
+			anim.Play("idle");
+		}
+		else
+		{
+			anim.Play("walk");
+		}
 		// Handle Jump.
 		if (Input.IsActionJustPressed("ui_accept") && IsOnFloor())
 		{

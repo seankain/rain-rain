@@ -2,6 +2,12 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
+public enum GameState
+{
+	Pause,
+	Playing,
+	Dead
+}
 public partial class Game : Node2D
 {
 
