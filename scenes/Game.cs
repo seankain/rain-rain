@@ -51,6 +51,8 @@ public partial class Game : Node2D
 	private void HandleRespawnTimer()
 	{
 		gameState = GameState.Playing;
+		enemiesSpawned = 0;
+		hud.SetScore(enemiesSpawned);
 		player.Revive();
 		hud.SetMessage("GO!", 2);
 	}
