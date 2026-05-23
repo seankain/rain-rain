@@ -9,12 +9,13 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uwrxv"]
 size = Vector2(1751, 134)
 
-[node name="Game" type="Node2D" node_paths=PackedStringArray("hud", "player")]
+[node name="Game" type="Node2D" node_paths=PackedStringArray("hud", "player", "respawnTimer")]
 script = ExtResource("1_lnu2h")
 cooldown = 0.5
 hud = NodePath("CanvasLayer")
 player = NodePath("Player")
 EnemyScene = ExtResource("2_lbhrr")
+respawnTimer = NodePath("RespawnTimer")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." node_paths=PackedStringArray("scoreLabel", "messageLabel", "messageTimer")]
 offset = Vector2(-593.8, -266.82)
@@ -52,6 +53,10 @@ grow_vertical = 2
 size_flags_horizontal = 4
 
 [node name="MessageTimer" type="Timer" parent="CanvasLayer"]
+
+[node name="RespawnTimer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
 
 [node name="Player" parent="." instance=ExtResource("1_uwrxv")]
 z_index = 1
