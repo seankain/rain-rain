@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bvj5afr401yta"]
+[gd_scene format=3 uid="uid://bvj5afr401yta"]
 
 [ext_resource type="Script" uid="uid://ctbqitrpka3ju" path="res://scenes/Game.cs" id="1_lnu2h"]
 [ext_resource type="PackedScene" uid="uid://bvpir2jnee1fm" path="res://scenes/player.tscn" id="1_uwrxv"]
@@ -9,14 +9,21 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uwrxv"]
 size = Vector2(1751, 134)
 
-[node name="Game" type="Node2D" node_paths=PackedStringArray("hud", "player")]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iywne"]
+size = Vector2(245, 1248)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p57ef"]
+size = Vector2(238, 1235)
+
+[node name="Game" type="Node2D" unique_id=1436325737 node_paths=PackedStringArray("hud", "respawnTimer", "player")]
 script = ExtResource("1_lnu2h")
 cooldown = 0.5
 hud = NodePath("CanvasLayer")
+respawnTimer = NodePath("RespawnTimer")
 player = NodePath("Player")
 EnemyScene = ExtResource("2_lbhrr")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." node_paths=PackedStringArray("scoreLabel", "messageLabel", "messageTimer")]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1933443921 node_paths=PackedStringArray("scoreLabel", "messageLabel", "messageTimer")]
 offset = Vector2(-593.8, -266.82)
 transform = Transform2D(1, 0, 0, 1, -593.8, -266.82)
 follow_viewport_enabled = true
@@ -25,7 +32,7 @@ scoreLabel = NodePath("Score")
 messageLabel = NodePath("Message")
 messageTimer = NodePath("MessageTimer")
 
-[node name="Score" type="Label" parent="CanvasLayer"]
+[node name="Score" type="Label" parent="CanvasLayer" unique_id=1668972661]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -37,7 +44,7 @@ size_flags_vertical = 0
 text = "0"
 horizontal_alignment = 2
 
-[node name="Message" type="Label" parent="CanvasLayer"]
+[node name="Message" type="Label" parent="CanvasLayer" unique_id=1480921464]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -51,21 +58,32 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 
-[node name="MessageTimer" type="Timer" parent="CanvasLayer"]
+[node name="MessageTimer" type="Timer" parent="CanvasLayer" unique_id=434649839]
 
-[node name="Player" parent="." instance=ExtResource("1_uwrxv")]
+[node name="RespawnTimer" type="Timer" parent="." unique_id=234348312]
+wait_time = 3.0
+
+[node name="Player" parent="." unique_id=2015857763 instance=ExtResource("1_uwrxv")]
 z_index = 1
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=488085808]
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=713744657]
 z_index = 1
 position = Vector2(0, 306.775)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=965029762]
 shape = SubResource("RectangleShape2D_uwrxv")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D" unique_id=497741643]
+position = Vector2(-753.5, -691.775)
+shape = SubResource("RectangleShape2D_iywne")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D" unique_id=2045170233]
+position = Vector2(760, -681.275)
+shape = SubResource("RectangleShape2D_p57ef")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=4350350]
 visibility_layer = 2
 position = Vector2(0, -322.18)
 scale = Vector2(1.2636718, 1.2539064)

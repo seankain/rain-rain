@@ -30,6 +30,13 @@ public partial class Player : CharacterBody2D
 		Dead = true;
 		anim.Rotate(Mathf.DegToRad(90));
     }
+
+	public void Revive()
+	{
+		Dead = false;
+		anim.Rotation = 0;
+		anim.Play("idle");
+	}
 	public override void _PhysicsProcess(double delta)
 	{
 		if(Dead){ return; }

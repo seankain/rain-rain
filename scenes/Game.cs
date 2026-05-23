@@ -17,6 +17,9 @@ public partial class Game : Node2D
 	[Export]
 	private Hud hud;
 
+	[Export]
+	private Timer respawnTimer;
+
 	private double elapsed = 0;
 
 	private uint enemiesSpawned = 0;
@@ -29,20 +32,36 @@ public partial class Game : Node2D
 
 	private List<Node2D> enemyNodes = new();
 
+	private GameState gameState = GameState.Playing;
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
     {
 		player.Died += HandlePlayerDeath;
+		respawnTimer.Timeout += HandleRespawnTimer;
     }
 
     private void HandlePlayerDeath()
     {
-		hud.SetMessage("YOU ARE DEAD.",10);
+		gameState = GameState.Dead;
+		hud.SetMessage("YOU ARE DEAD.", 10);
+		respawnTimer.Start();
     }
+
+	private void HandleRespawnTimer()
+	{
+		gameState = GameState.Playing;
+		enemiesSpawned = 0;
+		hud.SetScore(enemiesSpawned);
+		player.Revive();
+		hud.SetMessage("GO!", 2);
+	}
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(double delta)
 	{
+		if (gameState != GameState.Playing) return;
+
 		elapsed+=delta;
 		if(elapsed >= cooldown){
 			// todo: handle resolution changes
