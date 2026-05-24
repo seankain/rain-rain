@@ -3,14 +3,8 @@ using System;
 
 public partial class EnemyDrop : RigidBody2D
 {
-	private const int FaceCols = 10;
-	private const int FaceRows = 10;
-	private const int FaceW = 327;
-	private const int FaceH = 252;
-
 	[Export]
 	public AnimatedSprite2D anim;
-	private Sprite2D faceSprite;
 
 	public override void _Ready()
 	{
@@ -18,17 +12,9 @@ public partial class EnemyDrop : RigidBody2D
 		this.anim = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 		this.anim.AnimationFinished += HandleAnimationFinished;
 
-		faceSprite = GetNode<Sprite2D>("FaceSprite");
-		var texture = GD.Load<Texture2D>("res://assets/drop_faces.png");
-		int faceIndex = GD.RandRange(0, FaceCols * FaceRows - 1);
-		var atlas = new AtlasTexture();
-		atlas.Atlas = texture;
-		atlas.Region = new Rect2(
-			(faceIndex % FaceCols) * FaceW,
-			(faceIndex / FaceCols) * FaceH,
-			FaceW, FaceH
-		);
-		faceSprite.Texture = atlas;
+		int frameCount = this.anim.SpriteFrames.GetFrameCount("default");
+		this.anim.Animation = "default";
+		this.anim.Frame = GD.RandRange(0, frameCount - 1);
 	}
 
     private void HandleAnimationFinished()
