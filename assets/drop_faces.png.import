@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bwtp6qj3nh8xm"
-path="res://.godot/imported/drop_faces.png-bwtp6qj3nh8xmf91a2c3d4e5f6a7b8c9.ctex"
+uid="uid://cjls64w5m72lo"
+path="res://.godot/imported/drop_faces.png-64972bcecd51a7a31129e05acf1319aa.ctex"
 metadata={
 "vram_texture": false
 }
@@ -11,7 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/drop_faces.png"
-dest_files=["res://.godot/imported/drop_faces.png-bwtp6qj3nh8xmf91a2c3d4e5f6a7b8c9.ctex"]
+dest_files=["res://.godot/imported/drop_faces.png-64972bcecd51a7a31129e05acf1319aa.ctex"]
 
 [params]
 
