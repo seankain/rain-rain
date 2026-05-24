@@ -10,6 +10,8 @@ public partial class Player : CharacterBody2D
 	public const float JumpVelocity = -400.0f;
 
 	private bool Dead = false;
+	private bool HasUmbrella = false;
+	private double umbrellaTimeRemaining = 0;
 
 	[Export]
 	private AnimatedSprite2D anim;
@@ -18,9 +20,15 @@ public partial class Player : CharacterBody2D
 	{
 	}
 
+	public void PickupUmbrella()
+	{
+		HasUmbrella = true;
+		umbrellaTimeRemaining = 10.0;
+	}
+
 	public void Hit()
 	{
-		if(Dead){ return; }
+		if (Dead || HasUmbrella) return;
 		this.Died?.Invoke();
 		Die();
 	}
@@ -29,47 +37,60 @@ public partial class Player : CharacterBody2D
 	{
 		Dead = true;
 		anim.Rotate(Mathf.DegToRad(90));
-    }
+	}
 
 	public void Revive()
 	{
 		Dead = false;
+		HasUmbrella = false;
+		umbrellaTimeRemaining = 0;
 		anim.Rotation = 0;
 		anim.Play("idle");
 	}
+
 	public override void _PhysicsProcess(double delta)
 	{
-		if(Dead){ return; }
+		if (Dead) return;
+
+		if (HasUmbrella)
+		{
+			umbrellaTimeRemaining -= delta;
+			if (umbrellaTimeRemaining <= 0)
+			{
+				HasUmbrella = false;
+				umbrellaTimeRemaining = 0;
+			}
+		}
+
 		Vector2 velocity = Velocity;
 
-		// Add the gravity.
 		if (!IsOnFloor())
 		{
 			velocity += GetGravity() * (float)delta;
 		}
-		
-		if(velocity.IsZeroApprox())
+
+		if (velocity.IsZeroApprox())
 		{
-			anim.Play("idle");
+			anim.Play(HasUmbrella ? "idle_umbrella" : "idle");
 		}
 		else
 		{
-			anim.Play("walk");
+			anim.Play(HasUmbrella ? "walk_umbrella" : "walk");
 		}
-		// Handle Jump.
+
 		if (Input.IsActionJustPressed("ui_accept") && IsOnFloor())
 		{
 			velocity.Y = JumpVelocity;
 		}
 
-		// Get the input direction and handle the movement/deceleration.
-		// As good practice, you should replace UI actions with custom gameplay actions.
 		Vector2 direction = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
 		if (direction != Vector2.Zero)
 		{
 			velocity.X = direction.X * Speed;
 			if (direction.X != 0)
+			{
 				anim.FlipH = direction.X < 0;
+			}
 		}
 		else
 		{
@@ -79,6 +100,4 @@ public partial class Player : CharacterBody2D
 		Velocity = velocity;
 		MoveAndSlide();
 	}
-
-
 }

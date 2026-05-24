@@ -21,62 +21,83 @@ public partial class Game : Node2D
 	private Timer respawnTimer;
 
 	private double elapsed = 0;
+	private double umbrellaElapsed = 0;
+	private const double UmbrellaCooldown = 15.0;
 
 	private uint enemiesSpawned = 0;
 
 	[Export]
 	private Player player;
 
-    [Export]
-    public PackedScene EnemyScene;
+	[Export]
+	public PackedScene EnemyScene;
+
+	[Export]
+	public PackedScene UmbrellaScene;
 
 	private List<Node2D> enemyNodes = new();
 
 	private GameState gameState = GameState.Playing;
 
-	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
-    {
+	{
 		player.Died += HandlePlayerDeath;
 		respawnTimer.Timeout += HandleRespawnTimer;
-    }
+	}
 
-    private void HandlePlayerDeath()
-    {
+	private void HandlePlayerDeath()
+	{
 		gameState = GameState.Dead;
 		hud.SetMessage("YOU ARE DEAD.", 10);
 		respawnTimer.Start();
-    }
+	}
 
 	private void HandleRespawnTimer()
 	{
 		gameState = GameState.Playing;
 		enemiesSpawned = 0;
+		umbrellaElapsed = 0;
 		hud.SetScore(enemiesSpawned);
 		player.Revive();
 		hud.SetMessage("GO!", 2);
 	}
 
-    // Called every frame. 'delta' is the elapsed time since the previous frame.
-    public override void _Process(double delta)
+	public override void _Process(double delta)
 	{
 		if (gameState != GameState.Playing) return;
 
-		elapsed+=delta;
-		if(elapsed >= cooldown){
-			// todo: handle resolution changes
+		elapsed += delta;
+		if (elapsed >= cooldown)
+		{
 			SpawnEnemy(new Vector2 { X = Random.Shared.Next(-580, 650), Y = -200 });
 			enemiesSpawned++;
 			hud.SetScore(enemiesSpawned);
 			elapsed = 0;
 		}
+
+		umbrellaElapsed += delta;
+		if (umbrellaElapsed >= UmbrellaCooldown)
+		{
+			SpawnUmbrella(new Vector2 { X = Random.Shared.Next(-500, 500), Y = 100 });
+			umbrellaElapsed = 0;
+		}
 	}
 
-	private void SpawnEnemy(Vector2 pos){
+	private void SpawnEnemy(Vector2 pos)
+	{
 		var p = GD.Load<PackedScene>(EnemyScene.ResourcePath);
-        var enemy = p.Instantiate();
-        AddChild(enemy);
-        ((Node2D)enemy).GlobalPosition = pos;
-        enemyNodes.Add((Node2D)enemy);
+		var enemy = p.Instantiate();
+		AddChild(enemy);
+		((Node2D)enemy).GlobalPosition = pos;
+		enemyNodes.Add((Node2D)enemy);
+	}
+
+	private void SpawnUmbrella(Vector2 pos)
+	{
+		if (UmbrellaScene == null) return;
+		var p = GD.Load<PackedScene>(UmbrellaScene.ResourcePath);
+		var pickup = p.Instantiate();
+		AddChild(pickup);
+		((Node2D)pickup).GlobalPosition = pos;
 	}
 }
