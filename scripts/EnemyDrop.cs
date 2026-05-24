@@ -5,12 +5,16 @@ public partial class EnemyDrop : RigidBody2D
 {
 	[Export]
 	public AnimatedSprite2D anim;
-	// Called when the node enters the scene tree for the first time.
+
 	public override void _Ready()
 	{
 		this.BodyEntered += HandleCollision;
 		this.anim = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 		this.anim.AnimationFinished += HandleAnimationFinished;
+
+		int frameCount = this.anim.SpriteFrames.GetFrameCount("default");
+		this.anim.Animation = "default";
+		this.anim.Frame = GD.RandRange(0, frameCount - 1);
 	}
 
     private void HandleAnimationFinished()
