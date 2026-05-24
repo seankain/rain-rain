@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dkjtqqc56oema" path="res://scenes/enemy_drop.tscn" id="2_lbhrr"]
 [ext_resource type="Texture2D" uid="uid://ddf22eosfyf71" path="res://assets/background.png" id="2_yqjtg"]
 [ext_resource type="Script" uid="uid://8n6ucf77h1qk" path="res://scenes/Hud.cs" id="3_iywne"]
+[ext_resource type="PackedScene" uid="uid://dsbfkb7ppoq35" path="res://scenes/umbrella_pickup.tscn" id="4_umbrp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uwrxv"]
 size = Vector2(1751, 134)
@@ -22,6 +23,7 @@ hud = NodePath("CanvasLayer")
 respawnTimer = NodePath("RespawnTimer")
 player = NodePath("Player")
 EnemyScene = ExtResource("2_lbhrr")
+UmbrellaScene = ExtResource("4_umbrp")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1933443921 node_paths=PackedStringArray("scoreLabel", "messageLabel", "messageTimer")]
 offset = Vector2(-593.8, -266.82)

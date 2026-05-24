@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bvpir2jnee1fm"]
+[gd_scene load_steps=9 format=3 uid="uid://bvpir2jnee1fm"]
 
 [ext_resource type="Texture2D" uid="uid://btmyvqxtxd0wl" path="res://assets/crosswalk_man.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://bdl6ndxp6ubb3" path="res://scenes/Player.cs" id="1_g2els"]
@@ -15,6 +15,14 @@ region = Rect2(0, 0, 200, 223)
 atlas = ExtResource("1_3vyb7")
 region = Rect2(200, 0, 200, 223)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_umb1"]
+atlas = ExtResource("1_3vyb7")
+region = Rect2(400, 0, 200, 223)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_umb2"]
+atlas = ExtResource("1_3vyb7")
+region = Rect2(600, 0, 200, 223)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_qlg0r"]
 animations = [{
 "frames": [{
@@ -27,6 +35,14 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_umb1")
+}],
+"loop": true,
+"name": &"idle_umbrella",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_qhqgy")
 }, {
 "duration": 1.0,
@@ -34,6 +50,17 @@ animations = [{
 }],
 "loop": true,
 "name": &"walk",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_umb1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_umb2")
+}],
+"loop": true,
+"name": &"walk_umbrella",
 "speed": 5.0
 }]
 
