@@ -68,6 +68,8 @@ public partial class Player : CharacterBody2D
 		if (direction != Vector2.Zero)
 		{
 			velocity.X = direction.X * Speed;
+			if (direction.X != 0)
+				anim.FlipH = direction.X < 0;
 		}
 		else
 		{
