@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bvpir2jnee1fm"]
+[gd_scene format=3 uid="uid://bvpir2jnee1fm"]
 
 [ext_resource type="Texture2D" uid="uid://btmyvqxtxd0wl" path="res://assets/crosswalk_man.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://bdl6ndxp6ubb3" path="res://scenes/Player.cs" id="1_g2els"]
@@ -6,6 +6,10 @@
 [sub_resource type="AtlasTexture" id="AtlasTexture_g2els"]
 atlas = ExtResource("1_3vyb7")
 region = Rect2(0, 0, 200, 223)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qlg0r"]
+atlas = ExtResource("1_3vyb7")
+region = Rect2(0, 223, 200, 223)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qhqgy"]
 atlas = ExtResource("1_3vyb7")
@@ -15,13 +19,13 @@ region = Rect2(0, 0, 200, 223)
 atlas = ExtResource("1_3vyb7")
 region = Rect2(200, 0, 200, 223)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_umb1"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_tuyoq"]
 atlas = ExtResource("1_3vyb7")
-region = Rect2(400, 0, 200, 223)
+region = Rect2(0, 223, 200, 223)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_umb2"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_fjrip"]
 atlas = ExtResource("1_3vyb7")
-region = Rect2(600, 0, 200, 223)
+region = Rect2(200, 223, 200, 223)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_qlg0r"]
 animations = [{
@@ -35,7 +39,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_umb1")
+"texture": SubResource("AtlasTexture_qlg0r")
 }],
 "loop": true,
 "name": &"idle_umbrella",
@@ -54,26 +58,26 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_umb1")
+"texture": SubResource("AtlasTexture_tuyoq")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_umb2")
+"texture": SubResource("AtlasTexture_fjrip")
 }],
 "loop": true,
 "name": &"walk_umbrella",
 "speed": 5.0
 }]
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("anim") groups=["player"]]
+[node name="Player" type="CharacterBody2D" unique_id=1852280138 node_paths=PackedStringArray("anim") groups=["player"]]
 collision_mask = 3
 script = ExtResource("1_g2els")
 anim = NodePath("AnimatedSprite2D")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=102501580]
 position = Vector2(0, -66)
 sprite_frames = SubResource("SpriteFrames_qlg0r")
-animation = &"walk"
+animation = &"walk_umbrella"
 autoplay = "idle"
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1872441104]
 polygon = PackedVector2Array(-14, -1, -44, -1, -58, -18, -28, -41, -18, -68, -38, -71, -30, -107, -3, -120, 1, -154, 25, -149, 32, -134, 22, -116, 19, -105, 23, -94, 47, -80, 50, -68, 43, -61, 23, -71, 16, -70, 27, -50, 35, -26, 40, -13, 22, 0)

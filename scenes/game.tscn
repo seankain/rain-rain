@@ -11,10 +11,10 @@
 size = Vector2(1751, 134)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iywne"]
-size = Vector2(245, 1248)
+size = Vector2(215, 1248)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p57ef"]
-size = Vector2(238, 1235)
+size = Vector2(223, 1235)
 
 [node name="Game" type="Node2D" unique_id=1436325737 node_paths=PackedStringArray("hud", "respawnTimer", "player")]
 script = ExtResource("1_lnu2h")
@@ -78,11 +78,11 @@ position = Vector2(0, 306.775)
 shape = SubResource("RectangleShape2D_uwrxv")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D" unique_id=497741643]
-position = Vector2(-753.5, -691.775)
+position = Vector2(-768.5, -691.775)
 shape = SubResource("RectangleShape2D_iywne")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D" unique_id=2045170233]
-position = Vector2(760, -681.275)
+position = Vector2(767.5, -681.275)
 shape = SubResource("RectangleShape2D_p57ef")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=4350350]

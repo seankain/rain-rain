@@ -78,7 +78,7 @@ public partial class Game : Node2D
 		umbrellaElapsed += delta;
 		if (umbrellaElapsed >= UmbrellaCooldown)
 		{
-			SpawnUmbrella(new Vector2 { X = Random.Shared.Next(-500, 500), Y = 200 });
+			SpawnUmbrella(new Vector2 { X = Random.Shared.Next(-500, 500), Y = 100 });
 			umbrellaElapsed = 0;
 		}
 	}

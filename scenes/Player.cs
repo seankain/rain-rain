@@ -28,8 +28,7 @@ public partial class Player : CharacterBody2D
 
 	public void Hit()
 	{
-		if (Dead) return;
-		if (HasUmbrella) return;
+		if (Dead || HasUmbrella) return;
 		this.Died?.Invoke();
 		Die();
 	}
@@ -89,7 +88,9 @@ public partial class Player : CharacterBody2D
 		{
 			velocity.X = direction.X * Speed;
 			if (direction.X != 0)
+			{
 				anim.FlipH = direction.X < 0;
+			}
 		}
 		else
 		{
