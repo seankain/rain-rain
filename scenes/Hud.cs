@@ -14,6 +14,7 @@ public partial class Hud : CanvasLayer
 	public override void _Ready()
     {
 		messageTimer.Autostart = false;
+		messageTimer.OneShot = true;
 		messageTimer.Timeout += HandleMessageTimerEnd;
     }
 
