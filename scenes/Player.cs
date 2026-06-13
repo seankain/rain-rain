@@ -99,5 +99,31 @@ public partial class Player : CharacterBody2D
 
 		Velocity = velocity;
 		MoveAndSlide();
+
+		WrapToScreen();
+	}
+
+	private void WrapToScreen()
+	{
+		Camera2D camera = GetViewport().GetCamera2D();
+		if (camera == null) return;
+
+		Vector2 viewSize = GetViewport().GetVisibleRect().Size / camera.Zoom;
+		float halfWidth = viewSize.X / 2.0f;
+
+		Vector2 center = camera.GetScreenCenterPosition();
+		float left = center.X - halfWidth;
+		float right = center.X + halfWidth;
+
+		Vector2 pos = GlobalPosition;
+		if (pos.X < left)
+		{
+			pos.X = right;
+		}
+		else if (pos.X > right)
+		{
+			pos.X = left;
+		}
+		GlobalPosition = pos;
 	}
 }
