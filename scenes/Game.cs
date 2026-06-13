@@ -41,6 +41,7 @@ public partial class Game : Node2D
 
 	public override void _Ready()
 	{
+		respawnTimer.OneShot = true;
 		player.Died += HandlePlayerDeath;
 		respawnTimer.Timeout += HandleRespawnTimer;
 	}
