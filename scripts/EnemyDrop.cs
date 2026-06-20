@@ -34,7 +34,10 @@ public partial class EnemyDrop : RigidBody2D
 	public void HandleCollision(Node body){
         if (body.IsInGroup("player"))
         {
-			((Player)body).Hit();
+			// The drop's fall speed at the moment of impact determines whether
+			// this collision is hard enough to count as a crash.
+			float magnitude = this.LinearVelocity.Length();
+			((Player)body).Hit(magnitude);
         }
 		anim.Play("splash");
 	}

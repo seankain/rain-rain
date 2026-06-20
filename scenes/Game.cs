@@ -6,6 +6,7 @@ public enum GameState
 {
 	Pause,
 	Playing,
+	Crashing,
 	Dead
 }
 public partial class Game : Node2D
@@ -43,7 +44,16 @@ public partial class Game : Node2D
 	{
 		respawnTimer.OneShot = true;
 		player.Died += HandlePlayerDeath;
+		player.Crashed += HandlePlayerCrash;
 		respawnTimer.Timeout += HandleRespawnTimer;
+	}
+
+	private void HandlePlayerCrash()
+	{
+		// During the bail the player can't control the board or camera, so
+		// freeze the rest of the game until the crash resolves into a death.
+		gameState = GameState.Crashing;
+		hud.SetMessage("CRASH!", 2);
 	}
 
 	private void HandlePlayerDeath()
